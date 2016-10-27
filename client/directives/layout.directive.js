@@ -9,7 +9,7 @@ angular.module('bverifyApp')
         templateUrl: '../views/header.tpl.html',
         scope: {
             isLoggedIn: '@',
-            user: '@'
+            user: '='
         },
         link: function(scope, element, attrs) {
              scope.appName = "B-VERIFY";

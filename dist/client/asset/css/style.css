@@ -65,12 +65,19 @@ footer {
   text-align: center;
   padding: 0px 10px;
 }
-.userAccess ul li:first-child {
+.userAccess ul #loginLink {
   border-right: 2px solid #ffffff;
 }
 .userAccess ul a {
   color: #ffffff;
   cursor: pointer;
+  text-decoration: underline;
+}
+.userAccess ul b i {
+  text-decoration: underline;
+}
+.userAccess ul b .userLbl {
+  color: #ed7d31;
 }
 #custom-search-input {
   padding: 3px;

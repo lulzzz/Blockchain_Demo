@@ -14,15 +14,18 @@ exports.doLogin = function(reqObject, resObject) {
     try{        
     			var user = {
     				userName : "Abc1234",
-                    loggedIn : true,
+                    isAuthenticatedUser : true,
     				certification : 'B00RWSC2MW',
-    				consortium : '100kg',
+    				consortium : {
+                        id : '',
+                        name : ''    
+                    },
     				userProfile : {
                         id : 'PROD',
                         profile : 'producer'
                     }
     			}
-                resObject.json(user);
+                resObject.json({user: user});
    
     }catch(err){
         log.error("Error occurred while authenticating user", err);
@@ -37,15 +40,18 @@ exports.doRegistration = function(reqObject, resObject) {
     try{        
                 var user = {
                     userName : "Abc1234",
-                    loggedIn : true,
+                    isAuthenticatedUser : true,
                     certification : 'B00RWSC2MW',
-                    consortium : '100kg',
+                    consortium : {
+                        id : '',
+                        name : ''    
+                    },
                     userProfile : {
                         id : 'PROD',
                         profile : 'producer'
                     }
                 }
-                resObject.json(user);
+                resObject.json({user: user});
    
     }catch(err){
         log.error("Error occurred while registering user", err);

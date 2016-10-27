@@ -1,12 +1,12 @@
-
 <!-- Directive for app header -->
-<app-header isLoggedIn="vm.user.isAuthenticatedUser" user="vm.user"></app-header> <!-- TO-DO // remove hard-code value --> 
+<app-header isLoggedIn="vm.user.isAuthenticatedUser" user="vm.user"></app-header>
+<!-- TO-DO // remove hard-code value -->
 
 <div class="">
   <div class="searchResult col-lg-8 col-md-8 col-sm-10 col-xs-12">
 
     <app-legend header="Register User"></app-legend>
-  
+
     <div class="searchResultForm col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <form class="col-lg-8 col-md-9 col-sm-10 col-xs-10" ng-submit="vm.doRegistration()">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -33,7 +33,7 @@
             <select id="consortium" class="form-control">
                 <option id="IVN" value="International Association of Natural Textile Industry(IVN)">
                       International Association of Natural Textile Industry(IVN)</option>
-            </select>  
+            </select>
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -45,7 +45,7 @@
                 <option id="PROD" value="Raw Material Producer">Raw Material Producer</option>
                 <option id="MANUFACT" value="Manufacturer">Manufacturer</option>
                 <option id="RETAIL" value="Retailer">Retailer</option>
-            </select>            
+            </select>
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -66,10 +66,11 @@
         </div>
 
       </form>
-      
+
+    </div>
   </div>
-</div>
 
 
-<!-- Directive for app footer -->
-<app-footer></app-footer> <!-- TO-DO // remove hard-code value --> 
+  <!-- Directive for app footer -->
+  <app-footer></app-footer>
+  <!-- TO-DO // remove hard-code value -->

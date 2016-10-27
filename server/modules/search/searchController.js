@@ -21,7 +21,6 @@ exports.getShipmentDetails = function(reqObject, resObject) {
     				currentlyAt : 'DTDC'
     			}
                 resObject.json(shipmentDetails);
-   
     }catch(err){
         log.error("Error occurred while search shipment details", err);
         resObject.json({errMsg : constants.SERVICE_ERROR});
