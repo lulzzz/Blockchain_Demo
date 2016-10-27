@@ -21,13 +21,23 @@
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
     <script src="lib/angular-resource/angular-resource.min.js"></script>
+    <script src="jquery/dist/jquery.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Loading application files -->
     <script src="appConfig/app.route.js"></script>
     <script src="appConfig/app.config.js"></script>
     <script src="app.js"></script>
-    <script src="modules/search/search.controller.js"></script>
+    
+    <!-- User module -->
     <script src="modules/user/user.controller.js"></script>
+    <script src="modules/user/user.service.js"></script>
+    <script src="modules/user/user.model.js"></script>
+
+    <!-- Search/Track module -->
+    <script src="modules/search/search.controller.js"></script>
+    <script src="modules/search/search.service.js"></script>
+    
     <script src="directives/layout.directive.js"></script>
     <script async src='http://localhost:3001/browser-sync/browser-sync-client.js?v=2.17.5'></script>
 

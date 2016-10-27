@@ -7,7 +7,7 @@ var express = require("express"),
     userCtrl = require("../modules/user/userController.js"),
     router = express.Router();
 
-router.route('/trackShipment')
+router.route('/track')
     .get(function(req, res) {
         searchCtrl.getShipmentDetails(req, res);
     });

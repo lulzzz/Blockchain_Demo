@@ -5,18 +5,41 @@
 "use strict";
 
 angular.module('bverifyApp')
-        .service('userModel',['localStorageService', function(localStorageService){
+        .factory('userModel', ['localStorageService', function(localStorageService){
+        
+        var _init = {
+            userName: '',
+            certification: '',
+            consortium: {
+                id : '',
+                name : ''
+            },
+            userProfile : {
+                id : '',
+                profile : ''
+            },
+            isAuthenticatedUser : false
+            
+        };
 
-         function User(userName, certification, consortium, userProfile){
-             this.userName = userName || "";
-             this.certification = certification || "";
-             this.consortium = consortium || "";
-             this.userProfile = userProfile || "";
-         };
+        var _user = {};
+        var _reset = function() {
+            this._user = angular.copy(_init);
+            localStorageService.set('User', angular.toJson(_user));
+            return _user;
+        };
+        var _setUserDetails = function(obj) {
+            this._user = obj;
+            localStorageService.set('User', angular.toJson(_user));
+        };
+        var _getUserDetails = function() {
+            this._user = angular.fromJson(localStorageService.get('User')) || angular.copy(_init);
+            return this._user;
+        };
          
-         User.prototype.setUser = function(){
-             localStorageService.set('User', angular.toJson())
-         }
-
-
+        return {
+            'getUser': _getUserDetails,
+            'setUser': _setUserDetails,
+            'resetUser': _reset
+        }
 }]);

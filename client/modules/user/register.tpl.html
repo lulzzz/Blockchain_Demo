@@ -1,6 +1,6 @@
 
 <!-- Directive for app header -->
-<app-header isLoggedIn="false" user="{name:'saurabh', age: '26'}"></app-header> <!-- TO-DO // remove hard-code value --> 
+<app-header isLoggedIn="vm.user.isAuthenticatedUser" user="vm.user"></app-header> <!-- TO-DO // remove hard-code value --> 
 
 <div class="">
   <div class="searchResult col-lg-8 col-md-8 col-sm-10 col-xs-12">
@@ -8,13 +8,13 @@
     <app-legend header="Register User"></app-legend>
   
     <div class="searchResultForm col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <form class="col-lg-8 col-md-9 col-sm-10 col-xs-10">
+      <form class="col-lg-8 col-md-9 col-sm-10 col-xs-10" ng-submit="vm.doRegistration()">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 text-right-lg text-right-md text-sm-left text-xs-left formLabel">
             <label for="username">User Name :</label>
           </div>
           <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <input type="text" class="form-control" id="username" value="">
+            <input type="text" class="form-control" id="username" value="" ng-model="vm.user.userName">
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -22,7 +22,7 @@
             <label for="certification">Certification :</label>
           </div>
           <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <textarea rows="3" class="form-control" id="certification"></textarea>
+            <textarea rows="3" class="form-control" id="certification" ng-model="vm.user.certification"></textarea>
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

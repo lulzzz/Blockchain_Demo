@@ -6,10 +6,6 @@
 
 angular
     .module('appConfig', ['LocalStorageModule', 'ngResource'])
-    
-    /*.config('localStorageServiceProvider', function(localStorageServiceProvider){
-        localStorageServiceProvider.setDefaultToCookie(false);
-    })*/
     .constant('appConstants', {
         SERVICE_ERROR: "Service is temporarily unavailable. Please try after sometime."
     })
