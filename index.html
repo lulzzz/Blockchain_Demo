@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="bverifyApp">
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <base href="/">
+    <title>B-Verify</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="asset/css/style.css" />
+</head>
+
+<body>
+
+    <!-- All views will be render inside below directive -->
+    <div ui-view></div>
+
+    <!-- Loading required libraries -->
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script src="lib/angular-resource/angular-resource.min.js"></script>
+
+    <!-- Loading application files -->
+    <script src="appConfig/app.route.js"></script>
+    <script src="appConfig/app.config.js"></script>
+    <script src="app.js"></script>
+    <script src="modules/search/search.controller.js"></script>
+    <script src="modules/user/user.controller.js"></script>
+    <script src="directives/layout.directive.js"></script>
+    <script async src='http://localhost:3001/browser-sync/browser-sync-client.js?v=2.17.5'></script>
+
+</body>
+
+</html>

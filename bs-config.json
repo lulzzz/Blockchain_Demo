@@ -1,0 +1,9 @@
+{
+  "files": ["./client/**/*.css", "./client/**/*.js","./client/*.js", "./client/**/*.html", "./client/*.html", "./*.ico"],
+  "server": { 
+  		"baseDir": "./client"
+  		},
+  "open":true,
+  "injectChanges": false,
+  "logLevel": "info"
+} 

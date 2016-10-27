@@ -1,0 +1,200 @@
+@color-header :#5298D8; 
+@color-white: #fff;
+@color-greyWhite: #eee;
+@color-grey80: #ccc;
+@color-grey40: #666666;
+@color-grey40: #424242;
+@color-green: #00B050;
+@color-orange: #ED7D31;
+@color-label-black: #000000;
+
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.floatLeft {
+    float: left;
+}
+.floatRight {
+     float: right;   
+}
+.clearBoth {
+    clear: both;
+}
+.absPosition {
+	position: absolute;
+}
+.displayNone{
+	display:none;
+}
+.displayBlock {
+	display: block;
+}
+.displayInline {
+	display: inline;
+}
+.textAlignCenter {
+	text-align:center;
+}
+.getWidth(@width) {
+    width: @width;
+}
+.setMarginTop(@top) {
+    margin-top: @top;
+}
+.fontBold {
+	font-weight:bold;
+}
+.pointerCursor {
+	cursor: pointer;
+}
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+header {
+	background-color:@color-header;
+	color:@color-white;
+	#user-info {
+		background-color:@color-white;
+		color:@color-grey40;
+	}
+}
+footer {
+	clear:both;
+	background-color:@color-header;
+	color:@color-white;
+	right: 0;
+	bottom: 0;
+	left: 0;
+    padding: 0.5em 0;
+	position:fixed;
+}
+.appLogo {
+	padding-top:10px;
+}
+.mobileLogo {
+	clip: rect(0px,70px,200px,0px);
+    position: absolute;
+    left: 0;
+}
+.userAccess ul{
+	list-style:none;
+	li{
+		.displayInline;
+		.textAlignCenter;
+		padding:0px 10px;
+	}
+	li:first-child{
+		border-right:2px solid @color-white;
+	}
+	a{
+		color:@color-white;
+		.pointerCursor
+	}
+}
+
+#custom-search-input {
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+	background-color:@color-white;
+    .border-radius(6px);
+	.getWidth(80%) !important;
+	.floatLeft;
+	margin-right:15px;
+	input{
+		border: 0;
+		box-shadow: none;
+	}
+	button{
+		margin: 2px 0 0 0;
+		background: none;
+		box-shadow: none;
+		border: 0;
+		color: @color-grey40;
+		padding: 0 8px 0 10px;
+		border-left: solid 1px @color-grey80;
+		:hover{
+			border: 0;
+			box-shadow: none;
+		}
+	}
+	.glyphicon-search{
+    	font-size: 23px;
+	}
+	.glyphicon-search:focus{
+    	border:none;
+	}
+}
+
+.searchBox {
+    margin-top:50px;
+	.qrSearch {
+		margin-left:10px;
+	}
+}
+.legendHead{
+	color:@color-green;
+	.fontBold;
+	border-bottom:1px solid @color-orange;
+}
+.searchResult {
+	.setMarginTop(50px);
+	.formLabel{
+		.setMarginTop(5px);
+		padding-left:0px;
+	}
+	.searchResultForm{
+		.setMarginTop(25px);
+		.col-sm-12{
+			padding-left:0px;
+		}
+		form {
+			padding-right:0px;
+			.form-control[readonly] {
+				background-color: @color-white;
+				color: @color-grey80;
+				border: 1px solid #ccc;
+			}
+			.form-control {
+				background-color: @color-white;
+				color: @color-grey40;
+				border: 1px solid @color-grey40;
+			}
+		}
+	}
+	.searchResultQRCode {
+		.setMarginTop(100px);
+		.absPosition;
+		right:0px;
+		padding-left:0px;
+		padding-right:0px;
+		.token {
+			word-break: break-all;
+		}
+	}
+	.searchTooltip {
+		padding-left:0px;
+	}
+}
+.submitBtnColor, .submitBtnColor:hover{
+	background-color: @color-header;
+	color:@color-white;
+	border-color: inherit;
+	.fontBold;
+}
+
+.registerBtnDiv {
+	padding-left: 8% !important;
+}
+
+
+
+
+
+
+
+/* Import statement should be placed at bottom */
+@import (less) "./mediaQuery.less";
