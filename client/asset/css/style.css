@@ -29,6 +29,14 @@ body {
 .fontBold {
   font-weight: bold;
 }
+.formLabel1 {
+  margin-top: 5px;
+  padding-left: 0px;
+}
+.rawMaterialRegistration .formLabel {
+  margin-top: 5px;
+  padding-left: 0px;
+}
 header {
   background-color: #5298d8;
   color: #ffffff;
@@ -164,7 +172,8 @@ footer {
   padding-left: 0px;
 }
 .submitBtnColor,
-.submitBtnColor:hover {
+.submitBtnColor:hover,
+.submitBtnColor:focus {
   background-color: #5298d8;
   color: #ffffff;
   border-color: inherit;
@@ -192,6 +201,39 @@ footer {
   top: 50%;
   margin-left: -32px;
 }
+/*Side Menu*/
+.sidenav {
+  height: auto;
+  width: 20px;
+  position: fixed;
+  z-index: 1;
+  top: 25%;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5;
+}
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3;
+}
+.sidenav a :hover {
+  color: #f1f1f1;
+}
+.sidenav .closebtn {
+  position: absolute;
+  top: 50%;
+  transform: rotate(-90deg);
+  font-size: 14px;
+  left: -30px;
+}
+/*Side Menu*/
+/*rawMaterialRegistration*/
+/*rawMaterialRegistration*/
 /* Import statement should be placed at bottom */
 @media (max-width: 600px) {
   ::-webkit-input-placeholder {
@@ -289,5 +331,13 @@ footer {
   }
   .text-justify-lg {
     text-align: justify;
+  }
+}
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
   }
 }

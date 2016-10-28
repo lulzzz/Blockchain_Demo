@@ -57,4 +57,25 @@ angular.module('bverifyApp')
             });
         }
     }
-}]);
+}])
+
+//Directive for Side Menu Section
+.directive('sideMenu', function() {
+    return {
+        restrict: 'E',
+        templateUrl: '../views/sideMenu.tpl.html',
+        link: function(scope, element, attrs) {
+			var a=true;
+			scope.openNav = function(){
+				if(a==true){
+					document.getElementById("mySidenav").style.width = "250px";
+					a=false;
+				}
+				else{
+					document.getElementById("mySidenav").style.width = "20px";
+					a=true;
+				}
+			}
+        }
+    }
+});

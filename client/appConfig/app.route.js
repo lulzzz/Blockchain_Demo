@@ -20,7 +20,7 @@ angular
                 controller: 'searchController'
             })
             .state("home.result", {
-                url: '/home',
+                url: '/result',
                 templateUrl: '../modules/search/searchResult.tpl.html',
                 params: {
                     id: ''
@@ -79,14 +79,15 @@ angular
             $locationProvider.html5Mode(true);
     }])
 
+
     .run(['$rootScope', 'userModel', '$state', 'appConstants',
         function ($rootScope, userModel, $state, appConstants) {
         $rootScope.$on('$stateChangeStart',
                 function (event, toState, toParams, fromState, fromParams) {
             try{    
+                // Authenticating user. Maintaining session on each route
                 const user = userModel.getUser();
-                if ((toState.name !== 'login' && toState.name !== 'register'
-                                && toState.name !== 'home')){
+                if (!(appConstants.ROUTE_STATES_CONSTANTS.indexOf(toState.name) >= 0)){
                     if(user === null || !user.isAuthenticatedUser){  
                         event.preventDefault();
                         $state.go('home');

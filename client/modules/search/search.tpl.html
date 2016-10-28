@@ -1,7 +1,7 @@
 <!-- search based on shipment ID or QR code -->
 
 <!-- Directive for app header -->
-<app-header isLoggedIn="false" user="{name:'saurabh', age: '26'}"></app-header> <!-- TO-DO // remove hard-code value --> 
+<app-header isLoggedIn="vm.user.isAuthenticatedUser" user="vm.user"></app-header> <!-- TO-DO // remove hard-code value --> 
 
 <div class="container-fluid">
     <div class="row">
@@ -25,6 +25,4 @@
     </div>
 </div>
     <div ui-view class=""></div>
-<!-- Directive for app footer -->
-<app-footer></app-footer> <!-- TO-DO // remove hard-code value --> 
     

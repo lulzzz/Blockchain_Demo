@@ -30,7 +30,8 @@ angular
     }])
     .constant('appConstants', {
         SERVICE_ERROR: "Service is temporarily unavailable. Please try after sometime.",
-        FUNCTIONAL_ERR: "Something went wrong here...."
+        FUNCTIONAL_ERR: "Something went wrong here....",
+        ROUTE_STATES_CONSTANTS: ['login', 'register', 'home', 'home.result']
     })
     .run(['$rootScope', function (rootScope) {
         rootScope.isLoggedIn = false;

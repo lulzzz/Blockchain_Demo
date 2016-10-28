@@ -55,6 +55,16 @@ body {
      -moz-border-radius: @radius;
           border-radius: @radius;
 }
+.formLabel1 {
+	.setMarginTop(5px);
+	padding-left:0px;
+}
+.rawMaterialRegistration {
+	.formLabel{
+		.setMarginTop(5px);
+		padding-left:0px;
+	};
+}
 header {
 	background-color:@color-header;
 	color:@color-white;
@@ -189,7 +199,7 @@ footer {
 		padding-left:0px;
 	}
 }
-.submitBtnColor, .submitBtnColor:hover{
+.submitBtnColor, .submitBtnColor:hover, .submitBtnColor:focus{
 	background-color: @color-header;
 	color:@color-white;
 	border-color: inherit;
@@ -199,7 +209,6 @@ footer {
 .registerBtnDiv {
 	padding-left: 8% !important;
 }
-
 
 #loaderDiv {
    .setCursor(wait);
@@ -221,6 +230,41 @@ footer {
 	}
 }
 
+/*Side Menu*/
+.sidenav {
+    height: auto;
+    width: 20px;
+    position: fixed;
+    z-index: 1;
+    top: 25%;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5;
+	a {
+		padding: 8px 8px 8px 32px;
+		text-decoration: none;
+		font-size: 25px;
+		color: #818181;
+		display: block;
+		transition: 0.3;
+		:hover{
+			color: #f1f1f1;
+		}
+	}
+	.closebtn {
+		position: absolute;
+		top: 50%;
+		transform:rotate(-90deg);
+		font-size: 14px;
+		left:-30px;
+	}
+}
+
+/*Side Menu*/
+/*rawMaterialRegistration*/
+
+/*rawMaterialRegistration*/
 
 
 /* Import statement should be placed at bottom */

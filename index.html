@@ -9,14 +9,18 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="asset/css/style.css" />
+    
 </head>
 
 <body>
 
     <!-- Directive for app footer -->
     <app-loader></app-loader> <!-- TO-DO // remove hard-code value --> 
+
     <!-- All views will be render inside below directive -->
     <div ui-view></div>
+	<side-menu><side-menu>
+	<app-footer></app-footer>
 
     <!-- Loading required libraries -->
     <script src="lib/angular/angular.min.js"></script>

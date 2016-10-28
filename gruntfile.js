@@ -64,7 +64,7 @@ module.exports = function (grunt) {
 		browserSync: {
             dev: {
                 bsFiles: {
-                    src :["./client/**/*.css", "./client/**/*.js","./client/*.js", "./client/**/*.html", "./client/*.html", "./*.ico"]
+                    src: ["./client/**/*.css", "./client/**/*.js", "./client/*.js", "./client/**/*.html", "./client/*.html", "./*.ico"]
                 },
                 options: {
                     watchTask: true
@@ -79,8 +79,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-contrib-concat");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-contrib-copy");
-  	grunt.loadNpmTasks('grunt-contrib-watch');
-  	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-browser-sync');
 
