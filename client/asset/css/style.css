@@ -1,5 +1,6 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
 }
 .floatLeft {
   float: left;
@@ -27,9 +28,6 @@ body {
 }
 .fontBold {
   font-weight: bold;
-}
-.pointerCursor {
-  cursor: pointer;
 }
 header {
   background-color: #5298d8;
@@ -75,9 +73,11 @@ footer {
 }
 .userAccess ul b i {
   text-decoration: underline;
+  text-transform: capitalize;
 }
 .userAccess ul b .userLbl {
   color: #ed7d31;
+  text-transform: capitalize;
 }
 #custom-search-input {
   padding: 3px;
@@ -172,6 +172,25 @@ footer {
 }
 .registerBtnDiv {
   padding-left: 8% !important;
+}
+#loaderDiv {
+  cursor: wait;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1100;
+  background-color: #ffffff;
+  opacity: .5;
+}
+#loaderDiv .ajax-loader {
+  position: absolute;
+  display: block;
+  margin-top: -32px;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px;
 }
 /* Import statement should be placed at bottom */
 @media (max-width: 600px) {

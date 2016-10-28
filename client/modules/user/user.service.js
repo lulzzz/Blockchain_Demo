@@ -21,29 +21,38 @@ angular.module('bverifyApp')
     }])
 
     //Making service call for user login/register
-    .service('userServiceAPI', ['userResource', '$q', function (userResource, $q) {
+    .service('userServiceAPI', ['userResource', 'appConstants', '$q', function (userResource, appConstants, $q) {
+        
         this.register = function (user) {
             var deferred = $q.defer();
-            userResource
-                .registerUser(user)
-                .$promise
-                .then(function (response) {
-                    deferred.resolve(response);
-                }, function (err) {
-                    deferred.reject(err);
-                });
+            try{
+                userResource
+                    .registerUser(user)
+                    .$promise
+                    .then(function (response) {
+                        deferred.resolve(response);
+                    }, function (err) {
+                        deferred.reject(err);
+                    });
+            }catch(e){
+                console.log(appConstants.FUNCTIONAL_ERR, e);
+            }
             return deferred.promise;
         };
         this.login = function (user) {
             var deferred = $q.defer();
-            userResource
-                .authenticateUser(user)
-                .$promise
-                .then(function (response) {
-                    deferred.resolve(response);
-                }, function (err) {
-                    deferred.reject(err);
-                });
+            try{
+                userResource
+                    .authenticateUser(user)
+                    .$promise
+                    .then(function (response) {
+                        deferred.resolve(response);
+                    }, function (err) {
+                        deferred.reject(err);
+                    });
+            }catch(e){
+                console.log(appConstants.FUNCTIONAL_ERR, e);
+            }
             return deferred.promise;
         }
     }]);

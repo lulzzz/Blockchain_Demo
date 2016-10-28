@@ -5,4 +5,4 @@
 
 'use strict';
 
-angular.module('bverifyApp', ['appRoute', 'appConfig', 'ngResource']);
+angular.module('bverifyApp', ['appRoute', 'appConfig']);

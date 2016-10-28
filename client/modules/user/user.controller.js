@@ -40,7 +40,11 @@ angular.module('bverifyApp')
 }])
     .controller('logoutController', ['userModel', 'appConstants', '$state',
         function (userModel, appConstants, $state) {
-            var vm = this;
-            userModel.resetUser();
-            $state.go('home');
+            try{
+                var vm = this;
+                userModel.resetUser();
+                $state.go('home');
+            }catch(e){
+                console.log(appConstants.FUNCTIONAL_ERR, e);
+            }
 }]);

@@ -5,20 +5,28 @@
 "use strict";
 
 angular.module('bverifyApp')
-        // searchController for tracking shipment details
-        .controller('searchController', ['$state', function($state){
+    // searchController for tracking shipment details
+    .controller('searchController', ['$state', 'appConstants', function ($state, appConstants) {
+        try {
             var vm = this;
             vm.searchQuery = ''; //TO-DO need to remove harcode
-            vm.search = function(){
-                $state.go('home.result', {id : vm.searchQuery});
+            vm.search = function () {
+                $state.go('home.result', { id: vm.searchQuery });
             }
-}]) 
-        // searchResultController for rendering shipment details
-        .controller('searchResultController', ['searchServiceAPI', '$state', '$stateParams',
-                     function(searchServiceAPI, $state, $stateParams){
-            var vm = this;
-            (function(vm, $stateParams){
-                vm.product = searchServiceAPI.search($stateParams.id); 
-                console.log(vm.product);
-            })(vm, $stateParams);
-}]);        
+        } catch (e) {
+            console.log(appConstants.FUNCTIONAL_ERR, e);
+        }
+    }])
+    // searchResultController for rendering shipment details
+    .controller('searchResultController', ['searchServiceAPI', '$state', '$stateParams', 'appConstants',
+        function (searchServiceAPI, $state, $stateParams, appConstants) {
+            try {
+                var vm = this;
+                (function (vm, $stateParams) {
+                    vm.product = searchServiceAPI.search($stateParams.id);
+                    console.log(vm.product);
+                })(vm, $stateParams);
+            } catch (e) {
+                console.log(appConstants.FUNCTIONAL_ERR, e);
+            }
+        }]);        

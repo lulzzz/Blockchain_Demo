@@ -15,6 +15,12 @@ var server = require('./server')(app);
 var log = log4js.getLogger("app");
 
 
+app.use(function(req, res, next){
+		  res.set('X-Powered-By', 'B-Verify Retail Blockchain Application');
+		  next();
+		});
+
+
 //Render landing page
 app.get('/',function(req, res){
     res.sendFile(__dirname + '/index.html');
@@ -25,6 +31,7 @@ app.use('/api', route);
 app.get("*", function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
+
 
 /*
 *	Error Handler. Development error handler.

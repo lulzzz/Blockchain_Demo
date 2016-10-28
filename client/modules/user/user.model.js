@@ -5,7 +5,7 @@
 "use strict";
 
 angular.module('bverifyApp')
-    .factory('userModel', ['localStorageService', function (localStorageService) {
+    .factory('userModel', ['localStorageService', 'appConstants', function (localStorageService, appConstants) {
 
         var _init = {
             userName: '',
@@ -24,16 +24,28 @@ angular.module('bverifyApp')
 
         var _user = {};
         var _reset = function () {
-            this._user = angular.copy(_init);
-            localStorageService.remove('User');
+            try {
+                this._user = angular.copy(_init);
+                localStorageService.remove('User');
+            } catch (e) {
+                console.log(appConstants.FUNCTIONAL_ERR, e);
+            }
             return this._user;
         };
         var _setUserDetails = function (obj) {
-            this._user = obj;
-            localStorageService.set('User', angular.toJson(this._user));
+            try {
+                this._user = obj;
+                localStorageService.set('User', angular.toJson(this._user));
+            } catch (e) {
+                console.log(appConstants.FUNCTIONAL_ERR, e);
+            }
         };
         var _getUserDetails = function () {
-            this._user = angular.fromJson(localStorageService.get('User')) || angular.copy(_init);
+            try {
+                this._user = angular.fromJson(localStorageService.get('User')) || angular.copy(_init);
+            } catch (e) {
+                console.log(appConstants.FUNCTIONAL_ERR, e);
+            }
             return this._user;
         };
 

@@ -75,20 +75,25 @@ angular
             });
 
 
-        // use the HTML5 History API
-        $locationProvider.html5Mode(true);
+            // use the HTML5 History API
+            $locationProvider.html5Mode(true);
     }])
 
-    .run(['$rootScope', 'userModel', '$state',
-        function ($rootScope, userModel, $state) {
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+    .run(['$rootScope', 'userModel', '$state', 'appConstants',
+        function ($rootScope, userModel, $state, appConstants) {
+        $rootScope.$on('$stateChangeStart',
+                function (event, toState, toParams, fromState, fromParams) {
+            try{    
                 const user = userModel.getUser();
-            if ((toState.name !== 'login' && toState.name !== 'register'
-                             && toState.name !== 'home')){
-                if(user === null || !user.isAuthenticatedUser){  
-                    event.preventDefault();
-                    $state.go('home');
+                if ((toState.name !== 'login' && toState.name !== 'register'
+                                && toState.name !== 'home')){
+                    if(user === null || !user.isAuthenticatedUser){  
+                        event.preventDefault();
+                        $state.go('home');
+                    }
                 }
-            }
+            }catch (e) {
+               console.log(appConstants.FUNCTIONAL_ERR, e);
+        }
         });
 }])

@@ -19,17 +19,21 @@ angular.module('bverifyApp')
     }])
 
     //Making service call for searching shipment details
-    .service('searchServiceAPI', ['trackResource', '$q', function (trackResource, $q) {
+    .service('searchServiceAPI', ['trackResource', '$q', 'appConstants', function (trackResource, $q, appConstants) {
         this.search = function (searchObj) {
             var deferred = $q.defer();
-            trackResource
-                .trackShipment({ id: searchObj.id })
-                .$promise
-                .then(function (response) {
-                    deferred.resolve(response);
-                }, function (err) {
-                    deferred.reject(err);
-                });
+            try {
+                trackResource
+                    .trackShipment({ id: searchObj.id })
+                    .$promise
+                    .then(function (response) {
+                        deferred.resolve(response);
+                    }, function (err) {
+                        deferred.reject(err);
+                    });
+            } catch (e) {
+                console.log(appConstants.FUNCTIONAL_ERR, e);
+            }
             return deferred.promise;
         };
     }]);

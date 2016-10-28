@@ -11,6 +11,7 @@
 
 body {
 	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
 }
 
 .floatLeft {
@@ -46,8 +47,8 @@ body {
 .fontBold {
 	font-weight:bold;
 }
-.pointerCursor {
-	cursor: pointer;
+.setCursor(@cursor) {
+	cursor: @cursor;
 }
 .border-radius(@radius) {
   -webkit-border-radius: @radius;
@@ -92,14 +93,16 @@ footer {
 	}
 	a{
 		color:@color-white;
-		.pointerCursor;	
+		.setCursor(pointer);	
 		text-decoration: underline;
 	}
 	b i{
 		text-decoration: underline;
+		text-transform: capitalize;
 	}
 	b .userLbl{
 		color:@color-orange;
+		text-transform: capitalize;
 	}
 }
 
@@ -198,8 +201,25 @@ footer {
 }
 
 
-
-
+#loaderDiv {
+   .setCursor(wait);
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 1100;
+   background-color: @color-white;
+   opacity: .5;
+   .ajax-loader {
+		.absPosition;
+		.displayBlock;
+		.setMarginTop(-32px);
+		left: 50%;
+		top: 50%;
+		margin-left: -32px;   
+	}
+}
 
 
 
