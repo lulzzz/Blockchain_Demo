@@ -18,7 +18,8 @@ angular.module('bverifyApp')
                 id: '',
                 profile: ''
             },
-            isAuthenticatedUser: false
+            isAuthenticatedUser: false,
+            password: '' // TO-DO added for implementing login functionality. needs to replace with actual.
 
         };
 
@@ -48,10 +49,17 @@ angular.module('bverifyApp')
             }
             return this._user;
         };
-
+        var _isUserLoggedIn = function(){
+                return this._user.isAuthenticatedUser;
+        }
+        var _getUserProfile = function(){
+           return this._user.userProfile;
+        }
         return {
             'getUser': _getUserDetails,
             'setUser': _setUserDetails,
+            'isLoggedIn': _isUserLoggedIn,
+            'getUserProfile' : _getUserProfile,
             'resetUser': _reset
         }
     }]);

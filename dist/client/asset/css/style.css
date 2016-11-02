@@ -1,6 +1,14 @@
+/*grey*/
+html {
+  height: 100%;
+}
 body {
+  height: 100%;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
+}
+.noPadding {
+  padding: 0px !important;
 }
 .floatLeft {
   float: left;
@@ -23,8 +31,14 @@ body {
 .displayInline {
   display: inline;
 }
+.displayInlineBlock {
+  display: inline-block;
+}
 .textAlignCenter {
   text-align: center;
+}
+.textAlignLeft {
+  text-align: left;
 }
 .fontBold {
   font-weight: bold;
@@ -45,15 +59,17 @@ header #user-info {
   background-color: #ffffff;
   color: #424242;
 }
-footer {
-  clear: both;
-  background-color: #5298d8;
-  color: #ffffff;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 0.5em 0;
-  position: fixed;
+header .displayInlineBlock img {
+  vertical-align: initial;
+  padding-left: 10px;
+}
+header .userLbl {
+  color: #ed7d31;
+  text-transform: capitalize;
+}
+header .userRole {
+  text-decoration: underline;
+  text-transform: capitalize;
 }
 .appLogo {
   padding-top: 10px;
@@ -65,27 +81,19 @@ footer {
 }
 .userAccess ul {
   list-style: none;
+  /*.loginLink{
+		border-right:2px solid @color-white;  // Comment out. Register link will be available in side menu only
+	}*/
 }
 .userAccess ul li {
   display: inline;
   text-align: center;
   padding: 0px 10px;
 }
-.userAccess ul #loginLink {
-  border-right: 2px solid #ffffff;
-}
 .userAccess ul a {
   color: #ffffff;
   cursor: pointer;
   text-decoration: underline;
-}
-.userAccess ul b i {
-  text-decoration: underline;
-  text-transform: capitalize;
-}
-.userAccess ul b .userLbl {
-  color: #ed7d31;
-  text-transform: capitalize;
 }
 #custom-search-input {
   padding: 3px;
@@ -133,14 +141,11 @@ footer {
   border-bottom: 1px solid #ed7d31;
 }
 .searchResult {
-  margin-top: 50px;
+  margin-top: 40px;
 }
 .searchResult .formLabel {
   margin-top: 5px;
   padding-left: 0px;
-}
-.searchResult .searchResultForm {
-  margin-top: 25px;
 }
 .searchResult .searchResultForm .col-sm-12 {
   padding-left: 0px;
@@ -157,6 +162,11 @@ footer {
   background-color: #ffffff;
   color: #424242;
   border: 1px solid #424242;
+  border-radius: 0px;
+}
+.searchResult .searchResultForm form.registerProduct .form-group {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 .searchResult .searchResultQRCode {
   margin-top: 100px;
@@ -204,36 +214,164 @@ footer {
 /*Side Menu*/
 .sidenav {
   height: auto;
-  width: 20px;
+  overflow: hidden;
+  width: 200px;
+  margin-right: -165px;
   position: fixed;
   z-index: 1;
-  top: 25%;
+  top: 35%;
   right: 0;
-  background-color: #111;
+  padding-top: 45px;
+  padding-bottom: 45px;
+  background-color: #a0a0a0;
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
   overflow-x: hidden;
   transition: 0.5;
 }
 .sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
+  padding: 8px 15px 8px 20px;
+  text-align: right;
+  font-size: 12px;
+  color: white;
   display: block;
   transition: 0.3;
+  text-decoration: underline;
 }
-.sidenav a :hover {
-  color: #f1f1f1;
+.sidenav a:nth-child(2) {
+  text-decoration: none;
+  text-align: center;
+}
+.sidenav a:not( :nth-child(2)):hover {
+  color: #FFFF00;
+  text-decoration: none;
+}
+.sidenav a ul {
+  list-style: none;
 }
 .sidenav .closebtn {
   position: absolute;
-  top: 50%;
+  top: 43%;
   transform: rotate(-90deg);
-  font-size: 14px;
-  left: -30px;
+  font-size: 18px;
+  left: -100px;
+  width: 125%;
+}
+.sidenav .closebtnLeft {
+  position: absolute;
+  bottom: 7%;
+  transform: rotate(-90deg);
+  font-size: 18px;
+  left: 0px;
+}
+.sidenav .closebtnRight {
+  position: absolute;
+  top: 10%;
+  transform: rotate(-90deg);
+  font-size: 18px;
+  left: 0px;
+}
+.sidenav .selected {
+  font-weight: bold;
+  color: #FFFF00;
+}
+.registerProduct .registerBtn {
+  margin-top: 30px;
+}
+.singleSelect .btn-primary.active,
+.singleSelect .btn-primary:active,
+.singleSelect .open > .dropdown-toggle.btn-primary,
+.singleSelect .btn,
+.singleSelect .btn-primary.active.focus,
+.singleSelect .btn-primary.active:focus,
+.singleSelect .btn-primary.active:hover,
+.singleSelect .btn-primary:active.focus,
+.singleSelect .btn-primary:active:focus,
+.singleSelect .btn-primary:active:hover,
+.singleSelect .open > .dropdown-toggle.btn-primary.focus,
+.singleSelect .open > .dropdown-toggle.btn-primary:focus,
+.singleSelect .open > .dropdown-toggle.btn-primary:hover {
+  background-color: #ffffff;
+  border: 1px solid #424242;
+  color: #000000;
+  border-radius: 0px;
+  box-shadow: none;
+}
+.singleSelect .btn-primary.active .caret,
+.singleSelect .btn-primary:active .caret,
+.singleSelect .open > .dropdown-toggle.btn-primary .caret,
+.singleSelect .btn .caret,
+.singleSelect .btn-primary.active.focus .caret,
+.singleSelect .btn-primary.active:focus .caret,
+.singleSelect .btn-primary.active:hover .caret,
+.singleSelect .btn-primary:active.focus .caret,
+.singleSelect .btn-primary:active:focus .caret,
+.singleSelect .btn-primary:active:hover .caret,
+.singleSelect .open > .dropdown-toggle.btn-primary.focus .caret,
+.singleSelect .open > .dropdown-toggle.btn-primary:focus .caret,
+.singleSelect .open > .dropdown-toggle.btn-primary:hover .caret {
+  float: right;
+  margin-top: 7px;
+}
+.singleSelect .dropdown-menu {
+  border: 1px solid #424242;
+  border-radius: 0px;
+  margin-top: -1px;
+}
+.singleSelect .dropdown-menu > li > a {
+  white-space: normal;
 }
 /*Side Menu*/
-/*rawMaterialRegistration*/
-/*rawMaterialRegistration*/
+.manageProducts {
+  margin-top: 20px;
+}
+/**/
+.commonTable .ng-table-sort-header {
+  background-color: #5298d8;
+  color: #ffffff;
+}
+.commonTable .ng-table-sort-header th {
+  text-align: left !important;
+  border-right: 1px solid white;
+}
+.commonTable tbody tr {
+  color: black;
+}
+.commonTable tbody tr:nth-child(even) {
+  background-color: #D2DEEF;
+}
+.commonTable tbody tr:nth-child(odd) {
+  background-color: #EAEFF7;
+}
+.commonTable tbody tr td {
+  border-right: 1px solid white;
+}
+.commonTable tbody tr td a {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+  padding: 0px 10px;
+  border-right: 1px solid black;
+}
+.commonTable tbody tr td a:first-child {
+  padding-left: 0px;
+}
+.commonTable tbody tr td a:last-child {
+  border: none;
+}
+#wrapper {
+  min-height: 100%;
+  height: auto !important;
+  margin: 0 auto -75px;
+  padding: 0 0 60px;
+}
+/* Set the fixed height of the footer here */
+#footer .img {
+  background-image: url(../images/footer.png);
+  background-repeat: repeat-x;
+  height: 75px;
+}
+/**/
 /* Import statement should be placed at bottom */
 @media (max-width: 600px) {
   ::-webkit-input-placeholder {
@@ -335,9 +473,7 @@ footer {
 }
 @media screen and (max-height: 450px) {
   .sidenav {
-    padding-top: 15px;
-  }
-  .sidenav a {
-    font-size: 18px;
+    padding-top: 45px;
+    padding-bottom: 45px;
   }
 }

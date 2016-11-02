@@ -6,31 +6,46 @@
 "use strict";
 
 angular.module('bverifyApp')
-    //For new product/material resgistration
-    .controller('productRegisterController', ['userModel', 'appConstants', '$state',
-        function (userModel, appConstants, $state) {
+
+     //For dashboard of logged in user
+    .controller('dashboardController', ['userModel', 'appConstants', '$state', '$rootScope',
+        function (userModel, appConstants, $state, $rootScope) {
             try {
                 var vm = this;
                 vm.user = userModel.getUser();
+                $rootScope.isLoggedIn = userModel.isLoggedIn();
+            } catch (e) {
+                console.log(appConstants.FUNCTIONAL_ERR, e);
+            }
+        }])
+
+    //For new product/material resgistration
+    .controller('productRegisterController', ['userModel', 'appConstants', '$state', '$rootScope',
+        function (userModel, appConstants, $state, $rootScope) {
+            try {
+                var vm = this;
+                vm.user = userModel.getUser();
+                $rootScope.isLoggedIn = userModel.isLoggedIn();
             } catch (e) {
                 console.log(appConstants.FUNCTIONAL_ERR, e);
             }
         }])
 
     //For shipment of registered products
-    .controller('productShipController', ['userModel', 'appConstants', '$state',
-        function (userModel, appConstants, $state) {
+    .controller('productShipController', ['userModel', 'appConstants', '$state', '$rootScope',
+        function (userModel, appConstants, $state, $rootScope) {
             try {
                 var vm = this;
                 vm.user = userModel.getUser();
+                $rootScope.isLoggedIn = userModel.isLoggedIn();
             } catch (e) {
                 console.log(appConstants.FUNCTIONAL_ERR, e);
             }
         }])
 
     //For acknowledging received product
-    .controller('productAckController', ['userModel', 'appConstants', '$state',
-        function (userModel, appConstants, $state) {
+    .controller('productAckController', ['userModel', 'appConstants', '$state', '$rootScope',
+        function (userModel, appConstants, $state, $rootScope) {
             try {
                 var vm = this;
                 vm.user = userModel.getUser();

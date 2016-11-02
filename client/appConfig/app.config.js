@@ -5,7 +5,7 @@
 'use strict';
 
 angular
-    .module('appConfig', ['LocalStorageModule', 'ngResource'])
+    .module('appConfig', ['LocalStorageModule', 'ngResource','ui.bootstrap','ngTable'])
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('httpInterceptorService');
     }])
@@ -33,6 +33,7 @@ angular
         FUNCTIONAL_ERR: "Something went wrong here....",
         ROUTE_STATES_CONSTANTS: ['login', 'register', 'home', 'home.result']
     })
-    .run(['$rootScope', function (rootScope) {
-        rootScope.isLoggedIn = false;
+    .run(['$rootScope', function ($rootScope) {
+        $rootScope.isLoggedIn = false;
+        $rootScope.activeMenu = '';
     }]);

@@ -9,23 +9,69 @@ const log4js = require('log4js'),
 
 exports.doLogin = function(reqObject, resObject) {
     log.debug("******do login******", reqObject.body);
+    var r = reqObject.body;
     
 
     try{        
-    			var user = {
-    				userName : "Abc1234",
+    			var admin = {
+                    userName : "Admin_User",
                     isAuthenticatedUser : true,
-    				certification : 'B00RWSC2MW',
-    				consortium : {
+                    certification : 'B00RWSC2MW',
+                    consortium : {
                         id : '',
                         name : ''    
                     },
-    				userProfile : {
+                    userProfile : {
+                        id : 'ADMIN',
+                        profile : 'admin'
+                    },
+                    password : reqObject.password
+                };
+                var producer = {
+                    userName : "Producer_User",
+                    isAuthenticatedUser : true,
+                    certification : 'B00RWSC2MW',
+                    consortium : {
+                        id : '',
+                        name : ''    
+                    },
+                    userProfile : {
                         id : 'PROD',
                         profile : 'producer'
-                    }
-    			}
-                resObject.json({user: user});
+                    },
+                    password : reqObject.password
+                };
+                var manufact = {
+                    userName : "Manufacturer_User",
+                    isAuthenticatedUser : true,
+                    certification : 'B00RWSC2MW',
+                    consortium : {
+                        id : '',
+                        name : ''    
+                    },
+                    userProfile : {
+                        id : 'MANUFACT',
+                        profile : 'manufacturer'
+                    },
+                    password : reqObject.password
+                };
+                var retail = {
+                    userName : "Retailer_User",
+                    isAuthenticatedUser : true,
+                    certification : 'B00RWSC2MW',
+                    consortium : {
+                        id : '',
+                        name : ''    
+                    },
+                    userProfile : {
+                        id : 'RETAIL',
+                        profile : 'retailer'
+                    },
+                    password : reqObject.password
+                };
+                
+                resObject.json({user: r.userName === 'retailer' ? retail : r.userName === 'admin' ? admin : 
+                                r.userName === 'manufacturer' ? manufact : r.userName === 'producer' ? producer : {}});
    
     }catch(err){
         log.error("Error occurred while authenticating user", err);
@@ -49,7 +95,8 @@ exports.doRegistration = function(reqObject, resObject) {
                     userProfile : {
                         id : 'PROD',
                         profile : 'producer'
-                    }
+                    },
+                    password : reqObject.password
                 }
                 resObject.json({user: user});
    

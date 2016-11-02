@@ -29,7 +29,9 @@ angular.module('bverifyApp')
                 userServiceAPI
                     .login(vm.user)
                     .then(function (response) {
-                        console.log(response);
+                        userModel.setUser(response.user);
+                        vm.user = response.user;
+                        $state.go('dashboard'); //TO-DO this has to be redirect to dashboard screen
                     }, function (err) {
                         console.log(appConstants.FUNCTIONAL_ERR, err);
                     })
@@ -38,11 +40,12 @@ angular.module('bverifyApp')
                     })
             }
 }])
-    .controller('logoutController', ['userModel', 'appConstants', '$state',
-        function (userModel, appConstants, $state) {
+    .controller('logoutController', ['userModel', 'appConstants', '$state', '$rootScope',
+        function (userModel, appConstants, $state, $rootScope) {
             try{
                 var vm = this;
                 userModel.resetUser();
+                $rootScope.isLoggedIn = false;
                 $state.go('home');
             }catch(e){
                 console.log(appConstants.FUNCTIONAL_ERR, e);

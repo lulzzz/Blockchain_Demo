@@ -1,4 +1,4 @@
-<!-- Product/Material shipment by logged user -->
+<!-- Dashboard of loggedIn user -->
 
 <!-- Directive for app header -->
 <app-header isLoggedIn="vm.user.isAuthenticatedUser" user="vm.user"></app-header> <!-- TO-DO // remove hard-code value --> 
@@ -7,10 +7,11 @@
   <div class="searchResult col-lg-8 col-md-8 col-sm-10 col-xs-12">
 
     <!-- Directive for module header -->
-    <app-legend header="SHIP PRODUCT"></app-legend> <!-- TO-DO need to apply condition based on profile -->
+    <app-legend header="DASHBOARD"></app-legend> <!-- TO-DO need to apply condition based on profile -->
 
     </div>
   </div>
 
+  <side-menu user="vm.user"></side-menu>
 
-<side-menu user="vm.user"></side-menu>
+    

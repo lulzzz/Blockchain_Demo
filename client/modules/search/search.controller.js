@@ -6,10 +6,12 @@
 
 angular.module('bverifyApp')
     // searchController for tracking shipment details
-    .controller('searchController', ['$state', 'appConstants', function ($state, appConstants) {
+    .controller('searchController', ['$state', 'appConstants', 'userModel',
+                 function ($state, appConstants, userModel) {
         try {
             var vm = this;
             vm.searchQuery = ''; //TO-DO need to remove harcode
+            vm.user = userModel.getUser();
             vm.search = function () {
                 $state.go('home.result', { id: vm.searchQuery });
             }

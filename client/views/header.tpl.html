@@ -15,8 +15,9 @@
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 userAccess text-right">
 				<ul class="userLogin">
-					<li id="loginLink" ng-if="!user.isAuthenticatedUser"><a ui-sref="login"><b>Login</b></a></li>
-					<li ng-if="!user.isAuthenticatedUser"><a ui-sref="register"><b>Register</b></a></li>
+					<li class="loginLink" ng-if="!user.isAuthenticatedUser"><a ui-sref="login"><b>Login</b></a></li>
+					<!-- Comment out. Register link will be available in side menu and it's for admin only' -->
+					<!--<li ng-if="!user.isAuthenticatedUser"><a ui-sref="register"><b>Register</b></a></li>-->
                     <li ng-if="user.isAuthenticatedUser"><a ui-sref="logout"><b>Sign Out</b></a></li>
 				</ul>
 			</div>
@@ -25,19 +26,20 @@
 		<!-- USER INFORMATION -->
 
 		<div class="row" id="user-info" ng-if="user.isAuthenticatedUser">
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top: 4px;">
-				<i>&nbsp;</i>
-			</div>
-			<div style="margin-top: 4px;" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 userAccess text-right">
-					<ul>
-						<li><b>welcome <i class="userLbl">{{:: user.userName}}</i></b></li>
-					</ul>
-					<ul style="margin-top: -5px;">
-						<li><b>you have logged in as <i>{{:: user.userProfile.profile}}</i></b></li>
-					</ul>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userAccess text-right">
+				<div class="displayInlineBlock">
 					<div>
-						<img src="asset/images/qr_search.png"/>
+						<span><b>welcome</b></span>
+						<span><b><i class="userLbl">{{:: user.userName}}</i></b></span>
 					</div>
+					<div>
+						<span><b>you have logged in as</b></span>
+						<span><b><i class="userRole">{{:: user.userProfile.profile}}</i></b></span>
+					</div>
+				</div>
+				<div class="displayInlineBlock">
+					<img src="asset/images/qr_search.png" width="50px"/>
+				</div>
 			</div>
 		</div>
 

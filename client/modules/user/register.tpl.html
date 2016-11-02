@@ -6,7 +6,7 @@
   <div class="searchResult col-lg-8 col-md-8 col-sm-10 col-xs-12">
 
     <!-- Directive for module header -->
-    <app-legend header="Register User"></app-legend>
+    <app-legend header="REGISTER USER"></app-legend>
 
     <div class="searchResultForm col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <form class="col-lg-8 col-md-9 col-sm-10 col-xs-10" ng-submit="vm.doRegistration()">
@@ -30,23 +30,41 @@
           <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 text-right-lg text-right-md text-sm-left formLabel">
             <label for="consortium">Consortium :</label>
           </div>
-          <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="form-group singleSelect col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <select id="consortium" class="form-control">
-                <option id="IVN" value="International Association of Natural Textile Industry(IVN)">
-                      International Association of Natural Textile Industry(IVN)</option>
+                <option value="International Association of Natural Textile Industry(IVN)">International Association of Natural Textile Industry(IVN)</option>
             </select>
+			<!--<div class="btn-group" uib-dropdown style="width:100%">
+			  <button id="single-buttonConsortium" type="button" class="btn btn-primary textAlignLeft" uib-dropdown-toggle ng-disabled="disabled" style="width:100%;white-space:normal;">
+				<span>International Association of Natural Textile Industry(IVN)<span><span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-buttonConsortium" style="width:100%">
+				<li role="menuitem"><a href="#">International Association of Natural Textile Industry(IVN)</a></li>
+				<li role="menuitem"><a href="#">International Association of Natural Textile Industry(IVN)</a></li>
+			  </ul>
+			</div>-->
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 text-right-lg text-right-md text-sm-left formLabel">
             <label for="userProfile">Tag user profile :</label>
           </div>
-          <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="form-group singleSelect col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <select id="userProfile" class="form-control">
                 <option id="PROD" value="Raw Material Producer">Raw Material Producer</option>
                 <option id="MANUFACT" value="Manufacturer">Manufacturer</option>
                 <option id="RETAIL" value="Retailer">Retailer</option>
             </select>
+			<!-- <div class="btn-group" uib-dropdown style="width:100%">
+			  <button id="single-button" type="button" class="btn btn-primary textAlignLeft" uib-dropdown-toggle ng-disabled="disabled" style="width:100%;white-space:normal;">
+				<span>Raw Material Producer<span><span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" style="width:100%">
+				<li role="menuitem"><a href="#">Raw Material Producer</a></li>
+				<li role="menuitem"><a href="#">Manufacturer</a></li>
+				<li role="menuitem"><a href="#">Retailer</a></li>
+			  </ul>
+			</div>-->
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -61,8 +79,8 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 text-right-lg text-right-md text-sm-left formLabel"></div>
           <div class="registerBtnDiv form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <button type="submit" class="btn btn-success submitBtnColor">Submit</button>
-            <button type="reset" class="btn btn-success submitBtnColor">Cancel</button>
+            <button type="submit" class="btn btn-primary submitBtnColor">Submit</button>
+            <button type="reset" class="btn btn-primary submitBtnColor">Cancel</button>
           </div>
         </div>
 

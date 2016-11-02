@@ -8,19 +8,23 @@
     <title>B-Verify</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="ng-table/bundles/ng-table.min.css">
     <link rel="stylesheet" href="asset/css/style.css" />
-    
+
 </head>
 
 <body>
 
-    <!-- Directive for app footer -->
-    <app-loader></app-loader> <!-- TO-DO // remove hard-code value --> 
 
-    <!-- All views will be render inside below directive -->
-    <div ui-view></div>
-	<side-menu><side-menu>
-	<app-footer></app-footer>
+    <!-- Directive for app footer -->
+    <app-loader></app-loader>
+
+    <div id="wrapper">
+        <div ui-view></div>
+    </div>
+    <div style="clear:both"></div>
+
+    <app-footer></app-footer>
 
     <!-- Loading required libraries -->
     <script src="lib/angular/angular.min.js"></script>
@@ -29,7 +33,9 @@
     <script src="lib/angular-resource/angular-resource.min.js"></script>
     <script src="jquery/dist/jquery.min.js"></script>
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-
+    <script src="angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+    <script src="ng-table/bundles/ng-table.min.js"></script>
     <!-- Loading application files -->
     <script src="appConfig/app.route.js"></script>
     <script src="appConfig/app.config.js"></script>
