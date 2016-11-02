@@ -2,7 +2,7 @@
 html {
   height: 100%;
 }
-body {
+s body {
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
@@ -155,7 +155,7 @@ header .userRole {
 }
 .searchResult .searchResultForm form .form-control[readonly] {
   background-color: #ffffff;
-  color: #cccccc;
+  color: #424242;
   border: 1px solid #ccc;
 }
 .searchResult .searchResultForm form .form-control {
@@ -370,6 +370,10 @@ header .userRole {
   background-image: url(../images/footer.png);
   background-repeat: repeat-x;
   height: 75px;
+}
+.selectPOCls {
+  height: 26px;
+  width: 176px;
 }
 /**/
 /* Import statement should be placed at bottom */

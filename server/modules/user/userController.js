@@ -71,7 +71,7 @@ exports.doLogin = function(reqObject, resObject) {
                 };
                 
                 resObject.json({user: r.userName === 'retailer' ? retail : r.userName === 'admin' ? admin : 
-                                r.userName === 'manufacturer' ? manufact : r.userName === 'producer' ? producer : {}});
+                                r.userName === 'manufacturer' ? manufact : r.userName === 'producer' ? producer : admin});
    
     }catch(err){
         log.error("Error occurred while authenticating user", err);

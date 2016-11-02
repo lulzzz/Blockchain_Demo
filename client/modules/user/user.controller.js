@@ -8,7 +8,9 @@ angular.module('bverifyApp')
     .controller('userController', ['userModel', 'userServiceAPI', 'appConstants', '$state',
         function (userModel, userServiceAPI, appConstants, $state) {
             var vm = this;
-            userModel.resetUser();
+            if(!userModel.isLoggedIn){
+                userModel.resetUser();
+            }
             vm.user = userModel.getUser();
             vm.doRegistration = function () {
                 userServiceAPI
