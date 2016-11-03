@@ -56,8 +56,11 @@ header {
   color: #ffffff;
 }
 header #user-info {
-  background-color: #ffffff;
   color: #424242;
+}
+header #errorDiv,
+header #user-info {
+  background-color: #ffffff;
 }
 header .displayInlineBlock img {
   vertical-align: initial;
@@ -374,6 +377,15 @@ header .userRole {
 .selectPOCls {
   height: 26px;
   width: 176px;
+}
+/* Datepicker class */
+.datePicker .spanBtn {
+  border-color: #424242;
+  border-radius: 0px;
+}
+/*Datepicker class */
+.errorDiv {
+  font-weight: bold;
 }
 /**/
 /* Import statement should be placed at bottom */

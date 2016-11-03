@@ -7,7 +7,7 @@
 
 angular.module('bverifyApp')
 
-     //For dashboard of logged in user
+    //For dashboard of logged in user
     .controller('dashboardController', ['userModel', 'appConstants', '$state', '$rootScope', 'productServiceAPI',
         function (userModel, appConstants, $state, $rootScope, productServiceAPI) {
             try {
@@ -29,37 +29,60 @@ angular.module('bverifyApp')
                 vm.isManufacturer = userModel.isManufacturer();
                 vm.isRetailer = userModel.isRetailer();
                 vm.header = vm.isManufacturer ? 'REGISTER NEW PRODUCT' : 'REGISTER NEW MATERIAL';
-                vm.product = {};
+                vm.product = {
+                    name: '',
+                    quantity: '',
+                    batchNumber: '12',
+                    quality: '',
+                    color: '',
+                    weight: '',
+                    manufacturingDate: new Date()
+                };
+                vm.file = {
+                    name: ''
+                }
+                vm.uploadFile = function (file) {
+                    if (file) {
+                        vm.file.name = file.name;
+                        vm.product.file = file;
+                    }
+                };
+                vm.openDatepicker = function () {
+                    vm.datepickerObj.popup.opened = true;
+                };
                 vm.productList = [];
 
-/*      TO-DO need to test with actual data and implementation
                 // Register new Product/material
-                productServiceAPI
-                    .registerProduct(vm.product)
-                    .then(function (response) {
-                        vm.product = response.product;
-                        //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
-                    }, function (err) {
-                        console.log(appConstants.FUNCTIONAL_ERR, err);
-                    })
-                    .catch(function (e) {
-                        console.log(appConstants.FUNCTIONAL_ERR, e);
-                    });
-                
-                // get complete previous Product/material list
-                productServiceAPI
-                    .getProductList({})
-                    .then(function (response) {
-                        vm.productList = response.list;
-                        //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
-                    }, function (err) {
-                        console.log(appConstants.FUNCTIONAL_ERR, err);
-                    })
-                    .catch(function (e) {
-                        console.log(appConstants.FUNCTIONAL_ERR, e);
-                    });
-                
-*/
+                vm.registerNewProduct = function () {
+                    console.log(vm);
+                    productServiceAPI
+                        .registerProduct(vm.product)
+                        .then(function (response) {
+                            vm.product = response.product;
+                            //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
+                        }, function (err) {
+                            console.log(appConstants.FUNCTIONAL_ERR, err);
+                        })
+                        .catch(function (e) {
+                            console.log(appConstants.FUNCTIONAL_ERR, e);
+                        });
+                };
+
+                /*      TO-DO need to test with actual data and implementation                                
+                            // get complete previous Product/material list
+                            productServiceAPI
+                                .getProductList({})
+                                .then(function (response) {
+                                    vm.productList = response.list;
+                                    //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
+                                }, function (err) {
+                                    console.log(appConstants.FUNCTIONAL_ERR, err);
+                                })
+                                .catch(function (e) {
+                                    console.log(appConstants.FUNCTIONAL_ERR, e);
+                                });
+                            
+            */
             } catch (e) {
                 console.log(appConstants.FUNCTIONAL_ERR, e);
             }
@@ -74,20 +97,20 @@ angular.module('bverifyApp')
                 $rootScope.isLoggedIn = userModel.isLoggedIn();
                 vm.product = {};
 
-/*      TO-DO need to test with actual data and implementation
-                // do Product/material shipment
-                productServiceAPI
-                    .shipProduct(vm.product)
-                    .then(function (response) {
-                        vm.product = response.shippedProduct;
-                        //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
-                    }, function (err) {
-                        console.log(appConstants.FUNCTIONAL_ERR, err);
-                    })
-                    .catch(function (e) {
-                        console.log(appConstants.FUNCTIONAL_ERR, e);
-                    })
-*/
+                /*      TO-DO need to test with actual data and implementation
+                                // do Product/material shipment
+                                productServiceAPI
+                                    .shipProduct(vm.product)
+                                    .then(function (response) {
+                                        vm.product = response.shippedProduct;
+                                        //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
+                                    }, function (err) {
+                                        console.log(appConstants.FUNCTIONAL_ERR, err);
+                                    })
+                                    .catch(function (e) {
+                                        console.log(appConstants.FUNCTIONAL_ERR, e);
+                                    })
+                */
             } catch (e) {
                 console.log(appConstants.FUNCTIONAL_ERR, e);
             }
@@ -104,20 +127,20 @@ angular.module('bverifyApp')
                 vm.header = vm.isManufacturer ? 'PROCURE RAW MATERIALS' : 'ACKNOWLEDGE PRODUCTS';
                 vm.productList = [];
 
-/*      TO-DO need to test with actual data and implementation
-                // do Product/material shipment
-                productServiceAPI
-                    .ackProduct(vm.product)
-                    .then(function (response) {
-                        vm.product = response.shippedProduct;
-                        //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
-                    }, function (err) {
-                        console.log(appConstants.FUNCTIONAL_ERR, err);
-                    })
-                    .catch(function (e) {
-                        console.log(appConstants.FUNCTIONAL_ERR, e);
-                    });
-*/
+                /*      TO-DO need to test with actual data and implementation
+                                // do Product/material shipment
+                                productServiceAPI
+                                    .ackProduct(vm.product)
+                                    .then(function (response) {
+                                        vm.product = response.shippedProduct;
+                                        //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
+                                    }, function (err) {
+                                        console.log(appConstants.FUNCTIONAL_ERR, err);
+                                    })
+                                    .catch(function (e) {
+                                        console.log(appConstants.FUNCTIONAL_ERR, e);
+                                    });
+                */
             } catch (e) {
                 aconsole.log(appConstants.FUNCTIONAL_ERR, e);
             }

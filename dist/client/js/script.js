@@ -13,12 +13,12 @@ angular.module('bverifyApp', ['appRoute', 'appConfig']);
 'use strict';
 
 angular
-    .module('appConfig', ['LocalStorageModule', 'ngResource', 'ui.bootstrap', 'ngTable'])
+    .module('appConfig', ['LocalStorageModule', 'ngResource', 'ui.bootstrap', 'ngTable', 'ngAnimate', 'ngSanitize', 'ngFileUpload'])
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('httpInterceptorService');
     }])
-    .factory('httpInterceptorService', ['$q', '$rootScope', '$log',
-        function ($q, $rootScope, $log) {
+    .factory('httpInterceptorService', ['$q', '$rootScope', '$log', 'appConstants',
+        function ($q, $rootScope, $log, appConstants) {
             return {
                 request: function (config) {
                     // Show loader
@@ -31,6 +31,12 @@ angular
                     return response || $q.when(response);
                 },
                 responseError: function (response) {
+                     $rootScope.hasError = true;
+                    if(appConstants.ACCESS_DENIED_CODE.indexOf(response.status) >= 0){
+                        $rootScope.ERROR_MSG = appConstants.UNAUTHORIZED_ERROR;
+                    }else{
+                        $rootScope.ERROR_MSG = appConstants.SERVICE_ERROR;
+                    }
                     $rootScope.$broadcast("loaderHide");
                     return $q.reject(response);
                 }
@@ -38,8 +44,10 @@ angular
         }])
     .constant('appConstants', {
         SERVICE_ERROR: "Service is temporarily unavailable. Please try after sometime.",
+        UNAUTHORIZED_ERROR: "Access denied ! You may not have permission to acccess.",
         FUNCTIONAL_ERR: "Something went wrong here....",
         ROUTE_STATES_CONSTANTS: ['login', 'register', 'home', 'home.result'],
+        ACCESS_DENIED_CODE: [401, 403, 408],
         USER_ROLES: {
             admin: 'ADMIN',
             producer: 'PROD',
@@ -50,6 +58,8 @@ angular
     .run(['$rootScope', '$window', 'localStorageService', function ($rootScope, $window, localStorageService) {
         $rootScope.isLoggedIn = false;
         $rootScope.activeMenu = '';
+        $rootScope.hasError = false;
+        $rootScope.ERROR_MSG = "";
         $window.onunload = function () {
             localStorageService.remove('User');
         };
@@ -143,6 +153,7 @@ angular
                 function (event, toState, toParams, fromState, fromParams) {
                     try {
                         $rootScope.activeMenu = toState.url;
+                        $rootScope.hasError = false;
                         // Authenticating user. Maintaining session on each route
                         const user = userModel.getUser();
                         if (!(appConstants.ROUTE_STATES_CONSTANTS.indexOf(toState.name) >= 0)) {
@@ -182,6 +193,7 @@ angular.module('bverifyApp')
     .directive('appFooter', function () {
         return {
             restrict: 'E',
+            replace: true,
             templateUrl: '../views/footer.tpl.html',
             link: function (scope, element, attrs) {
             }
@@ -243,7 +255,7 @@ angular.module('bverifyApp')
             };
 
             return {
-                restrict: 'E',
+                restrict: 'E',            
                 templateUrl: '../views/sideMenu.tpl.html',
                 scope: {
                     user: '='
@@ -268,7 +280,41 @@ angular.module('bverifyApp')
                     }
                 }
             }
-        }]);
+        }])
+
+    //Directive for rendering module section
+    .directive('appDatepicker', function () {
+        return {
+            restrict: 'E',
+            templateUrl: '../views/datepicker.tpl.html',
+            link: function (scope, element, attrs) {
+                try {
+                    scope.vm.datepickerObj = {
+                        dateFormat: 'dd-MM-yyyy',
+                        dateOptions: {
+                            startingDay: 1,
+                            showWeeks: false
+                        },
+                        popup: {
+                            opened: false
+                        }
+                    };
+                } catch (e) {
+                    console.log(appConstants.FUNCTIONAL_ERR, e);
+                }
+            }
+        }
+    })
+
+    .directive('appFileuploader', function () {
+        return {
+            restrict: 'E',
+            templateUrl: '../views/fileUpload.tpl.html',
+            link: function (scope, element, attrs) {
+                
+            }
+        }
+    });
 /**
  * An Angular module that gives you access to the browsers local storage
  * @version v0.5.0 - 2016-08-29
@@ -38393,7 +38439,7 @@ this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+th
 
 angular.module('bverifyApp')
 
-     //For dashboard of logged in user
+    //For dashboard of logged in user
     .controller('dashboardController', ['userModel', 'appConstants', '$state', '$rootScope', 'productServiceAPI',
         function (userModel, appConstants, $state, $rootScope, productServiceAPI) {
             try {
@@ -38415,37 +38461,60 @@ angular.module('bverifyApp')
                 vm.isManufacturer = userModel.isManufacturer();
                 vm.isRetailer = userModel.isRetailer();
                 vm.header = vm.isManufacturer ? 'REGISTER NEW PRODUCT' : 'REGISTER NEW MATERIAL';
-                vm.product = {};
+                vm.product = {
+                    name: '',
+                    quantity: '',
+                    batchNumber: '12',
+                    quality: '',
+                    color: '',
+                    weight: '',
+                    manufacturingDate: new Date()
+                };
+                vm.file = {
+                    name: ''
+                }
+                vm.uploadFile = function (file) {
+                    if (file) {
+                        vm.file.name = file.name;
+                        vm.product.file = file;
+                    }
+                };
+                vm.openDatepicker = function () {
+                    vm.datepickerObj.popup.opened = true;
+                };
                 vm.productList = [];
 
-/*      TO-DO need to test with actual data and implementation
                 // Register new Product/material
-                productServiceAPI
-                    .registerProduct(vm.product)
-                    .then(function (response) {
-                        vm.product = response.product;
-                        //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
-                    }, function (err) {
-                        console.log(appConstants.FUNCTIONAL_ERR, err);
-                    })
-                    .catch(function (e) {
-                        console.log(appConstants.FUNCTIONAL_ERR, e);
-                    });
-                
-                // get complete previous Product/material list
-                productServiceAPI
-                    .getProductList({})
-                    .then(function (response) {
-                        vm.productList = response.list;
-                        //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
-                    }, function (err) {
-                        console.log(appConstants.FUNCTIONAL_ERR, err);
-                    })
-                    .catch(function (e) {
-                        console.log(appConstants.FUNCTIONAL_ERR, e);
-                    });
-                
-*/
+                vm.registerNewProduct = function () {
+                    console.log(vm);
+                    productServiceAPI
+                        .registerProduct(vm.product)
+                        .then(function (response) {
+                            vm.product = response.product;
+                            //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
+                        }, function (err) {
+                            console.log(appConstants.FUNCTIONAL_ERR, err);
+                        })
+                        .catch(function (e) {
+                            console.log(appConstants.FUNCTIONAL_ERR, e);
+                        });
+                };
+
+                /*      TO-DO need to test with actual data and implementation                                
+                            // get complete previous Product/material list
+                            productServiceAPI
+                                .getProductList({})
+                                .then(function (response) {
+                                    vm.productList = response.list;
+                                    //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
+                                }, function (err) {
+                                    console.log(appConstants.FUNCTIONAL_ERR, err);
+                                })
+                                .catch(function (e) {
+                                    console.log(appConstants.FUNCTIONAL_ERR, e);
+                                });
+                            
+            */
             } catch (e) {
                 console.log(appConstants.FUNCTIONAL_ERR, e);
             }
@@ -38460,20 +38529,20 @@ angular.module('bverifyApp')
                 $rootScope.isLoggedIn = userModel.isLoggedIn();
                 vm.product = {};
 
-/*      TO-DO need to test with actual data and implementation
-                // do Product/material shipment
-                productServiceAPI
-                    .shipProduct(vm.product)
-                    .then(function (response) {
-                        vm.product = response.shippedProduct;
-                        //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
-                    }, function (err) {
-                        console.log(appConstants.FUNCTIONAL_ERR, err);
-                    })
-                    .catch(function (e) {
-                        console.log(appConstants.FUNCTIONAL_ERR, e);
-                    })
-*/
+                /*      TO-DO need to test with actual data and implementation
+                                // do Product/material shipment
+                                productServiceAPI
+                                    .shipProduct(vm.product)
+                                    .then(function (response) {
+                                        vm.product = response.shippedProduct;
+                                        //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
+                                    }, function (err) {
+                                        console.log(appConstants.FUNCTIONAL_ERR, err);
+                                    })
+                                    .catch(function (e) {
+                                        console.log(appConstants.FUNCTIONAL_ERR, e);
+                                    })
+                */
             } catch (e) {
                 console.log(appConstants.FUNCTIONAL_ERR, e);
             }
@@ -38490,20 +38559,20 @@ angular.module('bverifyApp')
                 vm.header = vm.isManufacturer ? 'PROCURE RAW MATERIALS' : 'ACKNOWLEDGE PRODUCTS';
                 vm.productList = [];
 
-/*      TO-DO need to test with actual data and implementation
-                // do Product/material shipment
-                productServiceAPI
-                    .ackProduct(vm.product)
-                    .then(function (response) {
-                        vm.product = response.shippedProduct;
-                        //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
-                    }, function (err) {
-                        console.log(appConstants.FUNCTIONAL_ERR, err);
-                    })
-                    .catch(function (e) {
-                        console.log(appConstants.FUNCTIONAL_ERR, e);
-                    });
-*/
+                /*      TO-DO need to test with actual data and implementation
+                                // do Product/material shipment
+                                productServiceAPI
+                                    .ackProduct(vm.product)
+                                    .then(function (response) {
+                                        vm.product = response.shippedProduct;
+                                        //$state.go('product'); //TO-DO this has to be redirect to dashboard screen
+                                    }, function (err) {
+                                        console.log(appConstants.FUNCTIONAL_ERR, err);
+                                    })
+                                    .catch(function (e) {
+                                        console.log(appConstants.FUNCTIONAL_ERR, e);
+                                    });
+                */
             } catch (e) {
                 aconsole.log(appConstants.FUNCTIONAL_ERR, e);
             }

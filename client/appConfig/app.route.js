@@ -86,6 +86,7 @@ angular
                 function (event, toState, toParams, fromState, fromParams) {
                     try {
                         $rootScope.activeMenu = toState.url;
+                        $rootScope.hasError = false;
                         // Authenticating user. Maintaining session on each route
                         const user = userModel.getUser();
                         if (!(appConstants.ROUTE_STATES_CONSTANTS.indexOf(toState.name) >= 0)) {

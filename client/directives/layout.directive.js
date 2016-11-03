@@ -22,6 +22,7 @@ angular.module('bverifyApp')
     .directive('appFooter', function () {
         return {
             restrict: 'E',
+            replace: true,
             templateUrl: '../views/footer.tpl.html',
             link: function (scope, element, attrs) {
             }
@@ -83,7 +84,7 @@ angular.module('bverifyApp')
             };
 
             return {
-                restrict: 'E',
+                restrict: 'E',            
                 templateUrl: '../views/sideMenu.tpl.html',
                 scope: {
                     user: '='
@@ -108,4 +109,38 @@ angular.module('bverifyApp')
                     }
                 }
             }
-        }]);
+        }])
+
+    //Directive for rendering module section
+    .directive('appDatepicker', function () {
+        return {
+            restrict: 'E',
+            templateUrl: '../views/datepicker.tpl.html',
+            link: function (scope, element, attrs) {
+                try {
+                    scope.vm.datepickerObj = {
+                        dateFormat: 'dd-MM-yyyy',
+                        dateOptions: {
+                            startingDay: 1,
+                            showWeeks: false
+                        },
+                        popup: {
+                            opened: false
+                        }
+                    };
+                } catch (e) {
+                    console.log(appConstants.FUNCTIONAL_ERR, e);
+                }
+            }
+        }
+    })
+
+    .directive('appFileuploader', function () {
+        return {
+            restrict: 'E',
+            templateUrl: '../views/fileUpload.tpl.html',
+            link: function (scope, element, attrs) {
+                
+            }
+        }
+    });
