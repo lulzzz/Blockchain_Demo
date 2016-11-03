@@ -26,8 +26,8 @@ angular.module('bverifyApp')
                 var vm = this;
                 vm.user = userModel.getUser();
                 $rootScope.isLoggedIn = userModel.isLoggedIn();
-                vm.isManufacturer = (vm.user.userProfile.id === 'MANUFACT' ? true : false);
-                vm.isProducer = (vm.user.userProfile.id === 'PROD' ? true : false);
+                vm.isManufacturer = userModel.isManufacturer();
+                vm.isRetailer = userModel.isRetailer();
                 vm.header = vm.isManufacturer ? 'REGISTER NEW PRODUCT' : 'REGISTER NEW MATERIAL';
                 vm.product = {};
                 vm.productList = [];
@@ -99,8 +99,8 @@ angular.module('bverifyApp')
             try {
                 var vm = this;
                 vm.user = userModel.getUser();
-                vm.isManufacturer = (vm.user.userProfile.id === 'MANUFACT' ? true : false);
-                vm.isRetailer = (vm.user.userProfile.id === 'RETAIL' ? true : false);
+                vm.isManufacturer = userModel.isManufacturer();
+                vm.isRetailer = userModel.isRetailer();
                 vm.header = vm.isManufacturer ? 'PROCURE RAW MATERIALS' : 'ACKNOWLEDGE PRODUCTS';
                 vm.productList = [];
 

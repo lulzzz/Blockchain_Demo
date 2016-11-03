@@ -31,7 +31,13 @@ angular
     .constant('appConstants', {
         SERVICE_ERROR: "Service is temporarily unavailable. Please try after sometime.",
         FUNCTIONAL_ERR: "Something went wrong here....",
-        ROUTE_STATES_CONSTANTS: ['login', 'register', 'home', 'home.result']
+        ROUTE_STATES_CONSTANTS: ['login', 'register', 'home', 'home.result'],
+        USER_ROLES: {
+            admin: 'ADMIN',
+            producer: 'PROD',
+            manufacturer: 'MANUFACT',
+            retailer: 'RETAIL'
+        }
     })
     .run(['$rootScope', '$window', 'localStorageService', function ($rootScope, $window, localStorageService) {
         $rootScope.isLoggedIn = false;

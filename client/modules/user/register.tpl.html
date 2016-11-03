@@ -1,5 +1,5 @@
 <!-- Directive for app header -->
-<app-header isLoggedIn="vm.user.isAuthenticatedUser" user="vm.user"></app-header>
+<app-header isLoggedIn="!vm.user.isAuthenticatedUser" user="vm.user"></app-header>
 <!-- TO-DO // remove hard-code value -->
 
 <div class="">
@@ -15,7 +15,7 @@
             <label for="username">User Name :</label>
           </div>
           <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <input type="text" class="form-control" id="username" value="" ng-model="vm.user.userName">
+            <input type="text" class="form-control" id="username" value="" ng-model="vm.newUserObject.userName">
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -23,7 +23,7 @@
             <label for="certification">Certification :</label>
           </div>
           <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <textarea rows="3" class="form-control" id="certification" ng-model="vm.user.certification"></textarea>
+            <textarea rows="3" class="form-control" id="certification" ng-model="vm.newUserObject.certification"></textarea>
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -89,4 +89,5 @@
     </div>
   </div>
 
+<!-- Directive for app side menu -->
 <side-menu user="vm.user"></side-menu>

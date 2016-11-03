@@ -60,52 +60,52 @@ angular.module('bverifyApp')
 
     //Directive for Side Menu Section
     .directive('sideMenu', ['$rootScope', 'userModel', 'appConstants',
-                 function ($rootScope, userModel, appConstants) {
+        function ($rootScope, userModel, appConstants) {
 
-        function populateUserProfile(userModel) {
+            function populateUserProfile(userModel) {
+                return {
+                    isAdmin: userModel.isAdmin(),
+                    isProducer: userModel.isProducer(),
+                    isManufacturer: userModel.isManufacturer(),
+                    isRetailer: userModel.isRetailer()
+                }
+            };
+
+            function populateActiveMenu(menu) {
+                return {
+                    dashboard: menu === '/dashboard' ? true : false,
+                    userRegister: menu === '/register' ? true : false,
+                    prodRegister: menu === '/product/register' ? true : false,
+                    prodShip: menu === '/product/ship' ? true : false,
+                    trackShip: menu === '/home' ? true : false,
+                    prodAck: menu === '/product/acknowledge' ? true : false,
+                }
+            };
+
             return {
-                isAdmin: userModel.isLoggedIn() && userModel.getUserProfile().id === 'ADMIN' ? true : false,
-                isProducer: userModel.isLoggedIn() && userModel.getUserProfile().id === 'PROD' ? true : false,
-                isManufacturer: userModel.isLoggedIn() && userModel.getUserProfile().id === 'MANUFACT' ? true : false,
-                isRetailer: userModel.isLoggedIn() && userModel.getUserProfile().id === 'RETAIL' ? true : false
-            }
-        };
-
-        function populateActiveMenu(menu) {
-            return {
-                dashboard: menu === '/dashboard' ? true : false,
-                userRegister: menu === '/register' ? true : false,
-                prodRegister: menu === '/product/register' ? true : false,
-                prodShip: menu === '/product/ship' ? true : false,
-                trackShip: menu === '/home' ? true : false,
-                prodAck: menu === '/product/acknowledge' ? true : false,
-            }
-        };
-
-        return {
-            restrict: 'E',
-            templateUrl: '../views/sideMenu.tpl.html',
-            scope: {
-                user: '='
-            },
-            link: function (scope, element, attrs) {
-                try {
-                    scope.userProfile = populateUserProfile(userModel);
-                    scope.activeMenu = populateActiveMenu($rootScope.activeMenu);
-                    scope.a = false;
-                    scope.openNav = function () {
-                        if (scope.a == true) {
-                            $('#mySidenav').animate({ marginRight: '-165px' }, 500);//for sliding animation
-                            scope.a = false;
+                restrict: 'E',
+                templateUrl: '../views/sideMenu.tpl.html',
+                scope: {
+                    user: '='
+                },
+                link: function (scope, element, attrs) {
+                    try {
+                        scope.userProfile = populateUserProfile(userModel);
+                        scope.activeMenu = populateActiveMenu($rootScope.activeMenu);
+                        scope.a = false;
+                        scope.openNav = function () {
+                            if (scope.a == true) {
+                                $('#mySidenav').animate({ marginRight: '-165px' }, 500);//for sliding animation
+                                scope.a = false;
+                            }
+                            else {
+                                $('#mySidenav').animate({ marginRight: '0px' }, 500);//for sliding animation
+                                scope.a = true;
+                            }
                         }
-                        else {
-                            $('#mySidenav').animate({ marginRight: '0px' }, 500);//for sliding animation
-                            scope.a = true;
-                        }
+                    } catch (e) {
+                        console.log(appConstants.FUNCTIONAL_ERR, e);
                     }
-                } catch (e) {
-                    console.log(appConstants.FUNCTIONAL_ERR, e);
                 }
             }
-        }
-    }]);
+        }]);

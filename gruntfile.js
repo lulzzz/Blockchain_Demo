@@ -1,9 +1,16 @@
+/*
+**	gruntfile.js for automating project task.
+*	Tasks : Copying, Concatination, Minification, Watch, Less conversion, browser synchronization
+*/
+
 
 "use strict";
 
 //Exporting project level automation configuration
 module.exports = function (grunt) {
+	
 	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
 		clean: {
 			dist: ["dist/"]
 		},
@@ -12,11 +19,28 @@ module.exports = function (grunt) {
 		},
 		concat: {
 			dist: {
-				src: ["src/**/*.js"],
+				src: ["client/**/*.js"],
 				dest: "dist/client/js/script.js"
 			}
 		},
 		uglify: {
+			options: {
+				sourceMap: true,
+				sourceMapName: 'dist/client/js/scriptMap.map',
+				banner: '/*! Application : <%= pkg.name %>        '
+							+'Version : <%= pkg.version %>        '
+							+'Description : <%= pkg.description %>          ' 
+							+'Author : <%= pkg.author %>           '
+							+'License : <%= pkg.license %>         '
+							+'Created at : <%= grunt.template.today("yyyy-mm-dd") %> */',
+				compress: {
+					drop_console: true,
+					global_defs: {
+						'DEBUG': false
+					},
+					dead_code: true
+				}
+			},
 			dist: {
 				src: ["dist/client/js/script.js"],
 				dest: "dist/client/js/script-min.js"

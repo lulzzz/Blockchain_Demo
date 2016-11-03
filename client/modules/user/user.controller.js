@@ -12,13 +12,16 @@ angular.module('bverifyApp')
                 userModel.resetUser();
             }
             vm.user = userModel.getUser();
+            vm.newUserObject = {};
+
+            //register new user role. Only admin can add new user
             vm.doRegistration = function () {
                 userServiceAPI
-                    .register(vm.user)
+                    .register(vm.newUserObject)
                     .then(function (response) {
                         userModel.setUser(response.user);
                         vm.user = response.user;
-                        $state.go('product'); //TO-DO this has to be redirect to dashboard screen
+                        $state.go('dashboard'); 
                     }, function (err) {
                         console.log(appConstants.FUNCTIONAL_ERR, err);
                     })
@@ -27,6 +30,7 @@ angular.module('bverifyApp')
                     })
             }
 
+            //login current user. Any registered user can login
             vm.doLogin = function () {
                 userServiceAPI
                     .login(vm.user)
